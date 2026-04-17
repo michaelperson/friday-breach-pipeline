@@ -11,6 +11,9 @@ on:
     branches:
 
       - main
+  pull_request:
+    branches: [ main ]
+
 
 # LES JOBS : Les tâches à exécuter
 
@@ -45,6 +48,9 @@ jobs:
       - name: Installer les dépendances
 
         run: npm install
+      # Étape 3.1 : vérification de la qualité du code
+      - name: Vérification qualité du code (ESLint)
+        run: npm run lint
 
       # Étape 4 : Lance les tests
 
@@ -57,3 +63,14 @@ jobs:
       - name: Mission accomplie
 
         run: echo "Tous les tests sont au vert. L'Architecte est satisfait."
+
+      # Étape 6 : envoyer un message
+
+      - name : notification dans le chat
+        if: failure()
+        run: |
+          curl -X POST "${{ secrets.GOOGLE_CHAT_WEBHOOK }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+                "text": "Échec du pipeline GitHub Actions\n\nRepo: '${{ github.repository }}'\nBranche: '${{ github.ref_name }}'\n\nVoir le détail: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              }' 
