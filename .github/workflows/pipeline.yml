@@ -1,0 +1,59 @@
+# Le nom de ton pipeline — visible dans l'onglet Actions
+
+name:  Pipeline Automatique
+
+# DÉCLENCHEUR : Ce pipeline se lance à chaque push sur "main"
+
+on:
+
+  push:
+
+    branches:
+
+      - main
+
+# LES JOBS : Les tâches à exécuter
+
+jobs:
+
+  verifier-le-code:
+
+    name: Tests automatiques
+
+    runs-on: ubuntu-latest   # GitHub fournit une machine Ubuntu gratuite
+
+    steps:
+
+      # Étape 1 : Récupère le code du dépôt
+
+      - name: Récupérer le code
+
+        uses: actions/checkout@v4
+
+      # Étape 2 : Installe Node.js
+
+      - name:  Installer Node.js
+
+        uses: actions/setup-node@v4
+
+        with:
+
+          node-version: '20'
+
+      # Étape 3 : Installe les dépendances (jest, etc.)
+
+      - name: Installer les dépendances
+
+        run: npm install
+
+      # Étape 4 : Lance les tests
+
+      - name: Lancer les tests
+
+        run: npm test
+
+      # Étape 5 : Message de succès
+
+      - name: Mission accomplie
+
+        run: echo "Tous les tests sont au vert. L'Architecte est satisfait."
