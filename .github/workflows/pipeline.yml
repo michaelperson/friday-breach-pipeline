@@ -69,7 +69,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: rapport-mutation-stryker
-          path: reports/stryker/
+          path: reports/mutation/
           retention-days: 7
 
       # Étape 5 : Message de succès
