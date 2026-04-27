@@ -3,9 +3,17 @@
   "packageManager": "npm",
   "reporters": ["html", "clear-text", "progress", "json"],
   "testRunner": "jest",
+  "jest": {
+    "projectType": "custom",
+    "configFile": "jest.config.js",
+    "enableFindRelatedTests": false
+  },
+  "commandRunner": {
+    "command": "npm test -- --testPathPattern=app.test.js"
+  },
   "coverageAnalysis": "perTest",
-  "mutate": [   
-    "app/**/*.test.js",
+  "mutate": [
+    "app.js",
     "!jest.config.js",
     "!stryker.config.json"
   ],
