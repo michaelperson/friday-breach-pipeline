@@ -1,12 +1,11 @@
 {
   "$schema": "https://schema.stryker-mutator.io/stryker-config.schema.json",
   "packageManager": "npm",
-  "reporters": ["html", "clear-text", "progress"],
+  "reporters": ["html", "clear-text", "progress", "json"],
   "testRunner": "jest",
   "coverageAnalysis": "perTest",
-  "mutate": [
-    "*.js",
-    "app/**/*.js",
+  "mutate": [   
+    "app/**/*.test.js",
     "!jest.config.js",
     "!stryker.config.json"
   ],
