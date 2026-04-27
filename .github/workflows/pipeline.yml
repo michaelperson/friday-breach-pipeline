@@ -58,6 +58,20 @@ jobs:
 
         run: npm test
 
+      # Étape Mutation Testing
+      - name: Exécuter Stryker (Mutation Testing)
+        run: npx stryker run
+        # Le build s'arrêtera ici si le score < 70% grâce au "break" dans la config
+
+      # Étape d'archivage du rapport (s'exécute même si Stryker échoue pour voir les résultats)
+      - name: Sauvegarder le rapport de mutation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-mutation-stryker
+          path: reports/stryker/
+          retention-days: 7
+
       # Étape 5 : Message de succès
 
       - name: Mission accomplie
