@@ -4,6 +4,12 @@
   "reporters": ["html", "clear-text", "progress"],
   "testRunner": "jest",
   "coverageAnalysis": "perTest",
+  "mutate": [
+    "*.js",
+    "app/**/*.js",
+    "!jest.config.js",
+    "!stryker.config.json"
+  ],
   "thresholds": {
     "high": 80,
     "low": 70,
